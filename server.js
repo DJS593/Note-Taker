@@ -1,5 +1,10 @@
+// to communicate with Heroku we need to tell the app to communicate with the following environment variable
+const PORT = process.env.PORT || 3001;
+
+// the two codes below are needed to run express
 const express = require('express');
 const app = express();
+
 
 
 const { notes } = require('./db/db');
@@ -32,12 +37,9 @@ app.get('/api/notes', (req, res) => {
 
 
 
-// app.get('/api/notes', (req, res) => {
-//   res.json(notes);
-// });
 
+// the .listen() method allows the server to "listen" for the requests
 
-
-app.listen(3001, () => {
-  console.log(`API server now at port 3001!`);
+app.listen(PORT, () => {
+  console.log(`API server now at port ${PORT}!`);
 });
