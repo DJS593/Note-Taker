@@ -1,9 +1,21 @@
 {
   "notes": [
     {
-      "title": "Test Title",
-      "text": "Test text",
-      "id": "test_id"
+      "title": "trash",
+      "text": "take out",
+      "id": "1"
+    },
+    {
+      "title": "study",
+      "text": "javascript",
+      "id": "2"
+    },
+    {
+      "title": "workout",
+      "text": "bike 10 miles",
+      "id": "3"
     }
+
+
   ]
 }
