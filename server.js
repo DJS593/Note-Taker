@@ -1,11 +1,13 @@
 const fs = require('fs');
 const path = require('path');
+const express = require('express');
+//require('dotenv').config()
 
 // to communicate with Heroku we need to tell the app to communicate with the following environment variable
 const PORT = process.env.PORT || 3001;
 
 // the two codes below are needed to run express
-const express = require('express');
+
 const app = express();
 
 /* the following is needed so the server recognizes the incoming POST as JSON */
@@ -13,6 +15,7 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));
 // parse incoming JSON data
 app.use(express.json());
+app.use(express.static('public'));
 
 
 
@@ -54,14 +57,20 @@ function createNewNote(body, notesArray) {
   return note;
 }
 
+// function deleteNote(body, notesArray) {
+//   const note = body;
+//   notesArray = 
+// }
+
+
 function validateNote(note) {
   if (!note.title || typeof note.title !== 'string') {
     return false;
   }
-  if (!animal.text || typeof animal.text !== 'string') {
+  if (!note.text || typeof note.text !== 'string') {
     return false;
   }
-  if (!animal.id || typeof animal.id !== 'string') {
+  if (!note.id || typeof note.id !== 'string') {
     return false;
   }
   return true;
@@ -69,13 +78,12 @@ function validateNote(note) {
 
 
 
-app.get('/api/notes', (req, res) => {
-  let results = notes;
-  if (req.query) {
-    results = filterByQuery(req.query, results);
-  }
-  res.json(results);
-});
+
+
+
+
+// app.get('/secret/:password', (req,res)=> req.params.password === process.env.SECRET_PASSWORD ? res.sendFile(path.join(__dirname, "./public/secret.html")) : res.json("WRONG PASSWROD!"))
+
 
 app.get('/api/notes/:id', (req, res) => {
   const result = findById(req.params.id, notes);
@@ -86,19 +94,72 @@ app.get('/api/notes/:id', (req, res) => {
   }
 });
 
+app.get('/api/notes', (req, res) => {
+  let results = notes;
+  if (req.query) {
+    results = filterByQuery(req.query, results);
+  }
+  res.json(results);
+});
 
-app.post('/api/animals', (req, res) => {
+
+
+
+app.post('/api/notes', (req, res) => {
   // set id based on what the next index of the array will be
-  req.body.id = animals.length.toString();
+  req.body.id = notes.length.toString();
 
   // if any data in req.body is incorrect, send 400 error back
-  if (!vadidateNote(req.body)) {
+  if (!validateNote(req.body)) {
     res.status(400).send('The note is not properly formatted');
   } else {
     const note = createNewNote(req.body, notes);
     res.json(note);
   }
 });
+
+
+fs.writeFileSync(
+  path.join(__dirname, './db/db.json'),
+  JSON.stringify({ notes: notesArray }, null, 2)
+);
+
+
+app.delete('/api/notes/:id', (req, res) => {
+  const id = req.params.id;
+  const note = req.body;
+  
+  let noteDelete = [];
+
+  fs.readFile(
+    path.join(__dirname + './db/db.json'),
+    function (err, data) {
+      if (err) {
+        return console.log(err);
+      }
+      console.log(data)
+      noteDelete = JSON.parse(data);
+      notesDelete = notesDelete.filter(function(object) {
+        return object.id != id;
+      })
+    
+      fs.writeFile((path.join(__dirname + "/db/db.json")), JSON.stringify(notesDelete), function (error) {
+        if (error) { return console.log(error); }
+        res.json(notesDelete);
+    });
+
+  });  
+});
+
+
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, './public/index.html'));
+});
+
+app.get('/notes', (req, res) => {
+  res.sendFile(path.join(__dirname, './public/notes.html'));
+});
+
 
 
 // the .listen() method allows the server to "listen" for the requests
