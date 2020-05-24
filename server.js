@@ -98,7 +98,7 @@ app.post('/api/notes', (req, res) => {
 
 
 // remove a note via ID and then write a new file
-app.delete("/api/notes/:id", function (req, res) {
+app.delete('/api/notes/:id', function (req, res) {
     var id = req.params.id;
     fs.readFileSync('./db/db.json', (err, data) => {
         if (err) throw err;
