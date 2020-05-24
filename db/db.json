@@ -1,19 +1,14 @@
 {
   "notes": [
     {
-      "title": "Workout",
-      "text": "join a gym",
+      "title": "test 1",
+      "text": "5",
+      "id": "0"
+    },
+    {
+      "title": "test 2",
+      "text": "t",
       "id": "1"
-    },
-    {
-      "title": "Dinner",
-      "text": "Go to grocery store",
-      "id": "2"
-    },
-    {
-      "title": "Baseball",
-      "text": "Coaching team this weekend!",
-      "id": "3"
     }
   ]
 }
