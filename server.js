@@ -84,7 +84,7 @@ app.get('/api/notes', (req, res) => {
 
 // add a note to the db.json file utilizing the app.post method as well as createNewNote
 app.post('/api/notes', (req, res) => {
-    // set id based on what the next index of the array will be
+    // set ID based on what the next index of the array will be
     req.body.id = notes.length.toString();
 
     // if any data in req.body is incorrect, send 400 error back

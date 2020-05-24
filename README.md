@@ -37,5 +37,9 @@
   ## Deployed Note Taker application on Heroku<a name="deployed"><a>
   https://note-taker593.herokuapp.com/
   
-  ## Example Note-Taker.html<a name="example"></a>
+  ## Note Taker Example<a name="example"></a>
+  # Index.html (landing page)
+  ![image](https://user-images.githubusercontent.com/61851131/82765438-e7236580-9dcb-11ea-8c84-1c15635094ab.png)
+
+  # Notes.html (page to post & delete notes)
   ![image](https://user-images.githubusercontent.com/61851131/82748635-97578680-9d58-11ea-9019-3aceed4abede.png)
