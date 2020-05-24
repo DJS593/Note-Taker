@@ -43,13 +43,6 @@ function filterByQuery(query, notesArray) {
 };
 
 
-// function is designed to filter by id
-function findById(id, notesArray) {
-    const result = notesArray.filter(note => note.id === id)[0];
-    return result;
-}
-
-
 // function takes a new note, pushes the note into the notesArray and write a new JSON file
 function createNewNote(body, notesArray) {
     const note = body;
@@ -77,17 +70,6 @@ function validateNote(note) {
     }
     return true;
 };
-
-
-// display by ID; not relevant to the assignment, but may prove useful in the future
-app.get('/api/notes/:id', (req, res) => {
-    const result = findById(req.params.id, notes);
-    if (result) {
-        res.json(result);
-    } else {
-        res.send(404);
-    }
-});
 
 
 // links the JSON file to the front-end browser
