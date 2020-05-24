@@ -1,3 +1,19 @@
 {
-  "notes": []
+  "notes": [
+    {
+      "title": "excercise",
+      "text": "prepare for bike ride",
+      "id": "033016b0-56d7-404e-a6a3-ffad09937b27"
+    },
+    {
+      "title": "study",
+      "text": "review module 12",
+      "id": "19a7a7b9-9e91-45e4-b311-00699713979d"
+    },
+    {
+      "title": "dinner",
+      "text": "buy ingredients",
+      "id": "78fc155e-5ab9-49b9-bc86-d1ab648ef3d3"
+    }
+  ]
 }

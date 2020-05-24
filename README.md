@@ -2,7 +2,7 @@
   [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
   ## Description 
-  The app allows the user to enter notes beginning with a title and then a brief description.  The user can save the note using the save icon.  Once saved, the note will reside on the left side of the page.  In addition, to making new notes, the user can delete unwanted notes using the trash icon.  On the back-end the notes are added / deleted from a JSON file.  Each entry (note) is given a unique ID.  If a note is deleted, the IDs are "re-ordered." 
+  The app allows the user to enter notes beginning with a title and then a brief description.  The user can save the note using the save icon.  Once saved, the note will reside on the left side of the page.  In addition, to making new notes, the user can delete unwanted notes using the trash icon.  On the back-end the notes are added / deleted from a JSON file.  Each entry (note) is given a unique ID using npm uuid.
   
   ## Table of Contents
   * [Installation](#installation)
@@ -15,7 +15,7 @@
   * [Example](#example)
   
   ## Installation Instructions <a name="installation"></a> 
-  A user will need to clone the repository "Note-Taker", run "npm install express" and sign-up for Heroku if they wish to deploy on the platform.  A platform similar to Heroku is recommended to support the various API calls.  
+  A user will need to clone the repository "Note-Taker", run "npm install express" and "npm install uuid."  Since the application is utilizing API calls, a platform like Heroku is needed.  
   
   ## Usage Instructions <a name="usage"></a>
   For any user who wishes to use a convenient tool for taking and storing notes.

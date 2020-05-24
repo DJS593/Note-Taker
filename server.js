@@ -12,7 +12,10 @@ const app = express();
 // data parsing
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.static('public'));
+
+// UUID for unique identifiers 
+const { v4: uuidv4 } = require('uuid');
+uuidv4();
 
 
 // routes
@@ -84,9 +87,9 @@ app.get('/api/notes', (req, res) => {
 
 // add a note to the db.json file utilizing the app.post method as well as createNewNote
 app.post('/api/notes', (req, res) => {
-    // set ID based on what the next index of the array will be
-    req.body.id = notes.length.toString();
-
+    // Generating a random indentifier using npm uuid.
+    req.body.id = uuidv4();
+    
     // if any data in req.body is incorrect, send 400 error back
     if (!validateNote(req.body)) {
         res.status(400).send('The note is not properly formatted');
@@ -107,15 +110,13 @@ app.delete('/api/notes/:id', function (req, res) {
 
     for (var i = 0; i < notes.length; i++) {
         if (notes[i].id == id) {
-        notes.splice(i, 1);   
-
-            for (var i = 0; i < notes.length; i++) {
-                notes[i].id = i.toString();  
-            }
-            break;
-        }
+        notes.splice(i, 1);    
+        
+        break;    
+        }     
     }
 
+  // writing new db.json file
   fs.writeFile('./db/db.json', JSON.stringify({ notes: notes }, null, 2), (err) => {
       if (err) throw err;
   });
