@@ -44,8 +44,6 @@ function findById(id, notesArray) {
 }
 
 
-
-
 function createNewNote(body, notesArray) {
   const note = body;
   notesArray.push(note);
@@ -59,7 +57,13 @@ function createNewNote(body, notesArray) {
 
 // function deleteNote(body, notesArray) {
 //   const note = body;
-//   notesArray = 
+//   notesArray.push(note);
+//   fs.writeFileSync(
+//     path.join(__dirname, './db/db.json'),
+//     JSON.stringify({ notes: notesArray }, null, 2)
+//   );
+
+//   return note;
 // }
 
 
@@ -76,13 +80,6 @@ function validateNote(note) {
   return true;
 }
 
-
-
-
-
-
-
-// app.get('/secret/:password', (req,res)=> req.params.password === process.env.SECRET_PASSWORD ? res.sendFile(path.join(__dirname, "./public/secret.html")) : res.json("WRONG PASSWROD!"))
 
 
 app.get('/api/notes/:id', (req, res) => {
@@ -119,45 +116,41 @@ app.post('/api/notes', (req, res) => {
 });
 
 
-fs.writeFileSync(
-  path.join(__dirname, './db/db.json'),
-  JSON.stringify({ notes: notesArray }, null, 2)
-);
 
 
-app.delete('/api/notes/:id', (req, res) => {
-  const id = req.params.id;
-  const note = req.body;
-  
-  let noteDelete = [];
+app.delete("/api/notes/:id", function (req, res) {
+  var id = req.params.id;
+  fs.readFileSync('./db/db.json', (err, data) => {
+      if (err) throw err;
+      notes = JSON.parse(data);
+  });
 
-  fs.readFile(
-    path.join(__dirname + './db/db.json'),
-    function (err, data) {
-      if (err) {
-        return console.log(err);
+  for (var i = 0; i < notes.length; i++) {
+
+      if (notes[i].id == id) {
+          console.log("Deleting ==============");
+          console.log(notes[i]);
+          notes.splice(i, 1);
       }
-      console.log(data)
-      noteDelete = JSON.parse(data);
-      notesDelete = notesDelete.filter(function(object) {
-        return object.id != id;
-      })
-    
-      fs.writeFile((path.join(__dirname + "/db/db.json")), JSON.stringify(notesDelete), function (error) {
-        if (error) { return console.log(error); }
-        res.json(notesDelete);
-    });
+  }
 
-  });  
-});
+  fs.writeFile('./db/db.json', JSON.stringify({ notes: notes}, null, 2), (err) => {
+      if (err) throw err;
+      console.log('The file was updated!');
+  });
+
+  res.json(id);
+})
+
+
 
 
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, './public/index.html'));
+  res.sendFile(path.join(__dirname, '/public/index.html'));
 });
 
 app.get('/notes', (req, res) => {
-  res.sendFile(path.join(__dirname, './public/notes.html'));
+  res.sendFile(path.join(__dirname, '/public/notes.html'));
 });
 
 

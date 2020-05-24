@@ -2,22 +2,17 @@
   "notes": [
     {
       "title": "Workout",
-      "text": "Prepare for bike ride.",
-      "id": "0"
-    },
-    {
-      "title": "Class",
-      "text": "Finalize class assignment.",
+      "text": "join a gym",
       "id": "1"
     },
     {
       "title": "Dinner",
-      "text": "Bbq chicken and steak for the family.",
+      "text": "Go to grocery store",
       "id": "2"
     },
     {
-      "title": "test 1",
-      "text": "test 1",
+      "title": "Baseball",
+      "text": "Coaching team this weekend!",
       "id": "3"
     }
   ]
